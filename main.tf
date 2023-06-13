@@ -1,31 +1,9 @@
 provider "vault" {
-  auth_login_userpass {
-    username = var.TERRAFORM_USERNAME
-
-  }
-  alias     = "admin"
-  namespace = "admin"
+  namespace = "admin/alluvium-cloud"
 }
 
-variable "VAULT_ADDR" {
-  type        = string
-  description = "Vault Address"
-}
-
-variable "TERRAFORM_VAULT_USERNAME" {
-  type        = string
-  description = "Vault Username"
-}
-
-variable "TERRAFORM_VAULT_PASSWORD" {
-  type        = string
-  description = "Vault Password"
-}
-
-#--------------------------------------
-# Create 'admin/alluvium' namespace
-#--------------------------------------
-resource "vault_namespace" "alluvium" {
-  provider = vault.admin
-  path     = "alluvium"
+resource "vault_mount" "conad-cluster" {
+  path    = "conad-cluster"
+  type    = "kv-v2"
+  options = { version = "2" }
 }
