@@ -8,6 +8,10 @@ resource "vault_mount" "conad-cluster" {
   options = { version = "2" }
 }
 
+resource "vault_auth_backend" "approle" {
+  type = "approle"
+}
+
 module "approle" {
   source = "app.terraform.io/ericreeves-demo/approle/vault"
 
