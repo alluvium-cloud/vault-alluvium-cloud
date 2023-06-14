@@ -48,7 +48,7 @@ resource "vault_token" "nomad-cluster-token" {
   ttl       = "365d"
 }
 
-output "nomad-cluster-token" {
+output "nomad_cluster_token" {
   value     = vault_token.nomad-cluster-token.client_token
   sensitive = true
 }
