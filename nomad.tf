@@ -43,7 +43,7 @@ resource "vault_token_auth_backend_role" "nomad-cluster" {
 }
 
 resource "vault_token" "nomad-cluster-token" {
-  role_name = "nomad-cluster"
+  role_name = vault_token_auth_backend_role.nomad-cluster.role_name
   policies  = ["nomad-cluster-policy"]
   renewable = true
   ttl       = "365d"
