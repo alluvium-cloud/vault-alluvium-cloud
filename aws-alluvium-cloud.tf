@@ -8,7 +8,8 @@ module "tfc-auth-alluvium-cloud" {
     {
       workspace_name = "alluvium-infrastructure"
       project_name   = "Alluvium Cloud"
-      token_policies = ["aws/alluvium-cloud/traditional", "aws/alluvium-cloud/admin"]
+      auth_path      = "aws/alluvium-cloud"
+      token_policies = ["traditional", "admin"]
     }
   ]
 }

@@ -8,7 +8,8 @@ module "tfc-auth-alluvium-master" {
     {
       workspace_name = "tfc-jwt-test"
       project_name   = "Alluvium Cloud"
-      token_policies = ["aws/alluvium-master/traditional", "aws/alluvium-master/admin"]
+      auth_path      = "aws/alluvium-master"
+      token_policies = ["traditional", "admin"]
     }
   ]
 }
