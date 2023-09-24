@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/vault"
       version = "~> 3.11.0"
     }
+    tfe = {
+      source  = "hashicorp/tfe"
+      version = ">= 0.40.0"
+    }
   }
 
   cloud {
@@ -19,7 +23,7 @@ terraform {
     hostname     = "app.terraform.io"
 
     workspaces {
-      name = "alluvium-vault"
+      name = "vault-alluvium-cloud"
     }
   }
 }
