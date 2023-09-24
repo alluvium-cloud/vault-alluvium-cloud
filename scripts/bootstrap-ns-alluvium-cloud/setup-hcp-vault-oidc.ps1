@@ -1,7 +1,5 @@
 #!/usr/bin/pwsh
-$Env:VAULT_ADDR=""
-$Env:VAULT_TOKEN=""
-$Env:VAULT_NAMESPACE="admin"
+. .\env.ps1
 
 Write-Output "--- Enable JWT Auth"
 vault auth enable jwt

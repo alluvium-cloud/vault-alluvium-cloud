@@ -11,6 +11,7 @@ vault = {
 roles = [
   {
     workspace_name = "tfc-jwt-test"
+    project_name   = "Alluvium Cloud"
     token_policies = ["default"]
   }
 ]
