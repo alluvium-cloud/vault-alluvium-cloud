@@ -7,7 +7,7 @@ module "tfc-auth" {
   }
 
   vault = {
-    addr             = var.VAULT_ADDR
+    addr             = var.vault_addr
     auth_path        = "tfc/alluvium-cloud"
     auth_description = "JWT Auth for Terraform Cloud in alluvium-cloud"
   }

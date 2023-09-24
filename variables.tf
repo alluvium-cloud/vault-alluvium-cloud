@@ -1,7 +1,3 @@
-variable "TFC_TOKEN" {
-  description = "TFC Token"
-}
+variable "tfc_token" {}
 
-variable "VAULT_ADDR" {
-  description = "Vault Address"
-}
+variable "vault_addr" {}
