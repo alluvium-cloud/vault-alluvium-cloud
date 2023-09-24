@@ -37,4 +37,4 @@ terraform.rc
 **.private_key
 **.public_key
 **/keys
-**/env
+**/env.ps1
