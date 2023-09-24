@@ -43,6 +43,5 @@ output "vault_admin_username" {
 output "vault_admin_password" {
   description = "The password of created user"
   value       = random_string.password.result
-  sensitive   = true
 }
 
