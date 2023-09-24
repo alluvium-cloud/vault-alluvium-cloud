@@ -4,5 +4,5 @@ provider "vault" {
 }
 
 provider "tfe" {
-  token = var.tfc_token
+  token = var.TFC_TOKEN
 }
