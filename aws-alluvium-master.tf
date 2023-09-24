@@ -1,5 +1,5 @@
 module "tfc-auth-alluvium-master" {
-  source = "./terraform-vault-terraform-cloud-jwt-auth"
+  source = "./modules/terraform-vault-terraform-cloud-jwt-auth"
 
   terraform = local.terraform
   vault     = local.vault
