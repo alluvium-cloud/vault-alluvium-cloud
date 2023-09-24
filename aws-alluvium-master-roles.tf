@@ -1,6 +1,5 @@
-
-resource "vault_aws_secret_backend_role" "traditional" {
-  backend         = "aws/alluvium-cloud"
+resource "vault_aws_secret_backend_role" "aws-alluvium-master-traditional" {
+  backend         = "aws/alluvium-master"
   name            = "traditional"
   credential_type = "iam_user"
 
@@ -20,8 +19,8 @@ resource "vault_aws_secret_backend_role" "traditional" {
 EOF
 }
 
-resource "vault_aws_secret_backend_role" "admin" {
-  backend         = "aws/alluvium-cloud"
+resource "vault_aws_secret_backend_role" "aws-alluvium-master-admin" {
+  backend         = "aws/alluvium-master"
   name            = "admin"
   credential_type = "iam_user"
 
