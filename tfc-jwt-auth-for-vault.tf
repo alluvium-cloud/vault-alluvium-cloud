@@ -1,3 +1,11 @@
+#
+# This code was all largey borrowed from the hashi-strawb/terrafom-cloud-jwt-auth/vault Module
+# https://github.com/hashi-strawb/terraform-vault-terraform-cloud-jwt-auth
+#
+# The module is simply expanded here for demonstration purposes
+# 
+# Example of using the module directly:
+#
 # module "tfc-auth" {
 #   source  = "hashi-strawb/terraform-cloud-jwt-auth/vault"
 #   version = "0.2.1"
@@ -20,6 +28,9 @@
 #   ]
 # }
 
+##########################################################################
+# Variables
+##########################################################################
 variable "terraform" {
   type = object({
     org = string
@@ -55,6 +66,17 @@ variable "roles" {
 }
 
 
+##########################################################################
+# Data Lookups
+##########################################################################
+data "tfe_workspace_ids" "all" {
+  names        = ["*"]
+  organization = var.terraform.org
+}
+
+##########################################################################
+# Resources
+##########################################################################
 resource "vault_jwt_auth_backend" "tfc" {
   description        = var.vault.auth_description
   path               = var.vault.auth_path
@@ -88,11 +110,6 @@ resource "vault_jwt_auth_backend_role" "tfc_workspaces" {
   user_claim = each.value.user_claim
   role_type  = each.value.role_type
   token_ttl  = each.value.token_ttl
-}
-
-data "tfe_workspace_ids" "all" {
-  names        = ["*"]
-  organization = var.terraform.org
 }
 
 resource "tfe_variable" "tfc_workspace_vault_provider_auth" {
