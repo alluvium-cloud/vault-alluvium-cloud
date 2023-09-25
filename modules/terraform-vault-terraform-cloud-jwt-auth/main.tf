@@ -86,6 +86,59 @@ resource "tfe_variable" "tfc_workspace_vault_provider_auth" {
   description = "Use TFC Dynamic Credentials to authenticate with Vault"
 }
 
+resource "tfe_variable" "enable_aws_provider_auth" {
+  for_each     = toset([for r in var.roles : r.workspace_name])
+  key          = "TFC_VAULT_BACKED_AWS_AUTH"
+  value        = true
+  category     = "env"
+  workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+
+  description = "Enable the Vault Secrets Engine integration for AWS."
+}
+
+resource "tfe_variable" "tfc_aws_mount_path" {
+  for_each     = toset([for r in var.roles : r.workspace_name])
+  key          = "TFC_VAULT_BACKED_AWS_MOUNT_PATH"
+  value        = vault_jwt_auth_backend.tfc.path
+  category     = "env"
+  workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+
+  description = "Path to where the AWS Secrets Engine is mounted in Vault."
+}
+
+resource "tfe_variable" "tfc_aws_auth_type" {
+  for_each     = toset([for r in var.roles : r.workspace_name])
+  key          = "TFC_VAULT_BACKED_AWS_AUTH_TYPE"
+  value        = "iam_user"
+  category     = "env"
+  workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+
+  description = "Role to assume via the AWS Secrets Engine in Vault."
+}
+
+
+resource "tfe_variable" "tfc_aws_run_role_arn" {
+  for_each     = toset([for r in var.roles : r.workspace_name])
+  workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+
+  key      = "TFC_VAULT_BACKED_AWS_RUN_ROLE_ARN"
+  value    = "arn:aws:iam::171065311147:role/tfc-iam-role"
+  category = "env"
+
+  description = "ARN of the AWS IAM Role the run will assume."
+}
+
+resource "tfe_variable" "tfc_aws_run_vault_role" {
+  for_each     = toset([for r in var.roles : r.workspace_name])
+  workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+
+  key      = "TFC_VAULT_BACKED_AWS_RUN_VAULT_ROLE"
+  value    = "${var.terraform.org}_${each.key}"
+  category = "env"
+
+  description = "Name of the Role in Vault to assume via the AWS Secrets Engine."
+}
+
 resource "tfe_variable" "tfc_workspace_tfc_vault_addr" {
   for_each     = toset([for r in var.roles : r.workspace_name])
   key          = "TFC_VAULT_ADDR"
@@ -106,6 +159,16 @@ resource "tfe_variable" "tfc_workspace_tfc_vault_namespace" {
 
   description = "Vault Namespace for TFC to use when authenticating with Vault"
 }
+
+# resource "tfe_variable" "tfc_workspace_vault_run_role_tf" {
+#   for_each     = toset([for r in var.roles : r.workspace_name])
+#   key          = "role"
+#   value        = "${var.terraform.org}_${each.key}"
+#   category     = "terraform"
+#   workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+
+#   description = "Role to use in the Vault auth method"
+# }
 
 resource "tfe_variable" "tfc_workspace_vault_run_role" {
   for_each     = toset([for r in var.roles : r.workspace_name])
