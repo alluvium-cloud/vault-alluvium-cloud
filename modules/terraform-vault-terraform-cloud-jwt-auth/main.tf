@@ -97,11 +97,15 @@ resource "tfe_variable" "enable_aws_provider_auth" {
 }
 
 resource "tfe_variable" "tfc_aws_mount_path" {
-  for_each     = toset([for r in var.roles : r.workspace_name])
+  for_each = {
+    for r in var.roles :
+    "${r.workspace_name}" => r
+  }
   key          = "TFC_VAULT_BACKED_AWS_MOUNT_PATH"
-  value        = vault_jwt_auth_backend.tfc.path
+  value        = each.value.backend
   category     = "env"
   workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+  # value        = vault_jwt_auth_backend.tfc.path
 
   description = "Path to where the AWS Secrets Engine is mounted in Vault."
 }
