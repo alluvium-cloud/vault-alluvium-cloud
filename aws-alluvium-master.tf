@@ -7,7 +7,7 @@ module "tfc-auth-alluvium-master" {
 
   vault = {
     addr      = var.vault_addr
-    auth_path = "tfc-alluvium-master"
+    auth_path = "aws/alluvium-master"
   }
 
   roles = [
