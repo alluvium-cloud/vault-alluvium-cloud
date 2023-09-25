@@ -13,8 +13,7 @@ module "tfc-auth-alluvium-cloud" {
 
   roles = [
     {
-      workspace_name = "alluvium-infrastructure"
-      # project_name    = "Alluvium Cloud"
+      workspace_name  = "app-team-1"
       token_policies  = ["tfc-policy"]
       backend         = "aws/alluvium-cloud"
       policy_document = <<EOF
@@ -24,7 +23,7 @@ module "tfc-auth-alluvium-cloud" {
     {
       "Effect": "Allow",
       "Action": [
-        "s3:*"
+        "*"
       ],
       "Resource": "*"
     }
@@ -33,7 +32,7 @@ module "tfc-auth-alluvium-cloud" {
 EOF
     },
     {
-      workspace_name  = "tfc-jwt-test-cloud"
+      workspace_name  = "alluvium-infrastructure"
       token_policies  = ["tfc-policy"]
       backend         = "aws/alluvium-cloud"
       policy_document = <<EOF
@@ -43,7 +42,7 @@ EOF
     {
       "Effect": "Allow",
       "Action": [
-        "s3:*"
+        "*"
       ],
       "Resource": "*"
     }
@@ -51,6 +50,5 @@ EOF
 }
 EOF
     }
-
   ]
 }

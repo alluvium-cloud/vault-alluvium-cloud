@@ -13,7 +13,7 @@ module "tfc-auth-alluvium-master" {
 
   roles = [
     {
-      workspace_name  = "tfc-jwt-test"
+      workspace_name  = "app-team-2"
       token_policies  = ["tfc-policy"]
       backend         = "aws/alluvium-master"
       policy_document = <<EOF
