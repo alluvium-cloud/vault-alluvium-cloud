@@ -12,7 +12,7 @@ resource "vault_policy" "admin" {
 }
 
 resource "random_string" "password" {
-  length  = 20
+  length  = 18
   special = true
   upper   = true
 }
