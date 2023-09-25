@@ -7,6 +7,7 @@ module "tfc-auth-alluvium-master" {
 
   vault = {
     addr      = var.vault_addr
+    namespace = var.vault_namespace
     auth_path = "jwt-tfc-alluvium-master"
   }
 
