@@ -86,6 +86,16 @@ resource "tfe_variable" "tfc_workspace_vault_provider_auth" {
   description = "Use TFC Dynamic Credentials to authenticate with Vault"
 }
 
+resource "tfe_variable" "vault_backed_aws_sleep" {
+  for_each     = toset([for r in var.roles : r.workspace_name])
+  key          = "TFC_VAULT_BACKED_AWS_SLEEP_SECONDS"
+  value        = "30"
+  category     = "env"
+  workspace_id = data.tfe_workspace_ids.all.ids[each.key]
+
+  description = "Add a sleep between requesting AWS credentials and executing, because eventual consistency"
+}
+
 resource "tfe_variable" "enable_aws_provider_auth" {
   for_each     = toset([for r in var.roles : r.workspace_name])
   key          = "TFC_VAULT_BACKED_AWS_AUTH"
