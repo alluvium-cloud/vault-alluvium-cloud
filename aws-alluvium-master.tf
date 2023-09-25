@@ -24,7 +24,7 @@ module "tfc-auth-alluvium-master" {
       "Effect": "Allow",
       "Action": [
         "s3:*",
-        "ec2.*"
+        "ec2:*"
       ],
       "Resource": "*"
     }
