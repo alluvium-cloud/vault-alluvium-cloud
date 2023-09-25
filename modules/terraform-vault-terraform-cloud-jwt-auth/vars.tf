@@ -18,8 +18,10 @@ variable "vault" {
 
 variable "roles" {
   type = list(object({
-    workspace_name = string
-    token_policies = list(string)
+    workspace_name  = string
+    token_policies  = list(string)
+    policy_document = string
+    backend         = string
 
     project_name      = optional(string, "*") # Default to whatever project
     bound_audiences   = optional(list(string), ["vault.workload.identity"])

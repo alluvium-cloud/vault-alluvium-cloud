@@ -31,6 +31,18 @@ resource "vault_jwt_auth_backend" "tfc" {
   bound_issuer       = var.vault.auth_bound_issuer
 }
 
+resource "vault_aws_secret_backend_role" "aws_policy" {
+  for_each = {
+    for r in var.roles :
+    "${var.terraform.org}_${r.workspace_name}" => r
+  }
+  backend         = each.value.backend
+  name            = each.key
+  credential_type = "iam_user"
+
+  policy_document = each.value.policy_document
+}
+
 resource "vault_jwt_auth_backend_role" "tfc_workspaces" {
   for_each = {
     for r in var.roles :

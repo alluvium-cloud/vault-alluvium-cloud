@@ -12,9 +12,24 @@ module "tfc-auth-alluvium-cloud" {
 
   roles = [
     {
-      workspace_name = "alluvium-infrastructure"
-      project_name   = "Alluvium Cloud"
-      token_policies = ["traditional", "admin"]
+      workspace_name  = "alluvium-infrastructure"
+      project_name    = "Alluvium Cloud"
+      token_policies  = ["default"]
+      backend         = "aws/alluvium-cloud"
+      policy_document = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+EOF
     }
   ]
 }
