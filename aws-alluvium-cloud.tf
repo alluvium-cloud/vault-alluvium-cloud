@@ -13,8 +13,8 @@ module "tfc-auth-alluvium-cloud" {
 
   roles = [
     {
-      workspace_name  = "alluvium-infrastructure"
-      project_name    = "Alluvium Cloud"
+      workspace_name = "alluvium-infrastructure"
+      # project_name    = "Alluvium Cloud"
       token_policies  = ["tfc-policy"]
       backend         = "aws/alluvium-cloud"
       policy_document = <<EOF
